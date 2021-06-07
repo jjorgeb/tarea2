@@ -1,4 +1,4 @@
-public class Binary implements Type{
+public class Binary implements INumber, INumberNoFloat{
     private String Value;
 
     public Binary(String valor){
@@ -8,6 +8,9 @@ public class Binary implements Type{
 
     public String getValue(){
         return this.Value;
+    }
+    public int getValueInt(){
+        return toInt(this.Value);
     }
 
     private int toInt(String binary) {
@@ -53,11 +56,52 @@ public class Binary implements Type{
         return new Binary(this.Value);
     }
 
+    //@Override
+    public Binary suma(Int x){
+        return x.SumaBinary(this);
+    }
 
-
-
-
-
-
-
+    public Binary suma(INumberNoFloat x){
+        return x.SumaBinary(this);
+    }
+    public Binary suma(Binary x){
+        return x.SumaBinary(this);
+    }
+    //falta cambiar la funcion
+    public Binary SumaBinary(Binary x){
+        return this;
+    }
+    public Int SumaInt(Int x){
+        return new Int(toInt(this.Value)+x.getValue());
+    }
+    public Float SumaFloat(Float x){
+        return new Float(toInt(this.Value)+x.getValue());
+    }
+    public Binary RestaBinary(Binary x){
+        return this;
+    }
+    public Int RestaInt(Int x){
+        return new Int(x.getValue()-toInt(this.Value));
+    }
+    public Float RestaFloat(Float x){
+        return new Float(x.getValue()-toInt(this.Value));
+    }
+    public Binary MultiplicacionBinary(Binary x){
+        return this;
+    }
+    public Int MultiplicacionInt(Int x){
+        return new Int(x.getValue()*toInt(this.Value));
+    }
+    public Float MultiplicacionFloat(Float x){
+        return new Float(x.getValue()*toInt(this.Value));
+    }
+    public Binary DivisionBinary(Binary x){
+        return this;
+    }
+    public Int DivisionInt(Int x){
+        return new Int(x.getValue()/toInt(this.Value));
+    }
+    public Float DivisionFloat(Float x){
+        return new Float(x.getValue()/toInt(this.Value));
+    }
 }

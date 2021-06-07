@@ -1,4 +1,4 @@
-public class Int implements Type {
+public class Int implements INumber, INumberNoFloat {
     private int Value;
 
     public Int(int valor){
@@ -6,28 +6,28 @@ public class Int implements Type {
     }
 
 
-    private String toString(int i){
-        return String.valueOf(i);
+    public String toString(){
+        return String.valueOf(this.Value);
     }
 
-    private String toBin1(){
+    private String toBin1(int x){
         String s = "";
-        int v = this.Value;
+        int v = x;
         while(v>0){
-            s += toString(v%2);
+            s += String.valueOf(v%2);
             v = v/2;
         }
         return s;
     }
-    private String toBin2(){
-        if(this.Value>0){
-            return '1' + toBin1();
+    private String toBin2(int x){
+        if(x>0){
+            return '1' + toBin1(x);
         }
-        else if(this.Value==0){
+        else if(x==0){
             return "0000";
         }
         else{
-            return '1' + Add1(Neg(toBin1()));
+            return '1' + Add1(Neg(toBin1(x)));
         }
     }
 
@@ -61,21 +61,68 @@ public class Int implements Type {
         return s1;
     }
 
-    public String getValue(){
-        return toString(this.Value);
+    public int getValue(){
+        return this.Value;
     }
     public Float IntToFloat(){
         return new Float(Value);
     }
     public Str IntToString(){
-        return new Str(toString(this.Value));
+        return new Str(String.valueOf(this.Value));
     }
     public Int IntToInt(){
         return new Int(this.Value);
     }
     public Binary IntToBin(){
-        return new Binary(toBin2());
+        return new Binary(toBin2(this.Value));
     }
 
-
+    public Int suma(INumber x){
+        return x.SumaInt(this);
+    }
+    public Int SumaInt(Int x){
+        return new Int(this.Value + x.getValue());
+    }
+    public Float SumaFloat(Float x){
+        return new Float(x.getValue()+this.Value);
+    }
+    public Binary SumaBinary(Binary x){
+        return new Binary(toBin2(x.getValueInt()+this.Value));
+    }
+    public Int resta(INumber x){
+        return x.RestaInt(this);
+    }
+    public Int RestaInt(Int x){
+        return new Int(x.getValue() - this.Value);
+    }
+    public Float RestaFloat(Float x){
+        return new Float(x.getValue()-this.Value);
+    }
+    public Binary RestaBinary(Binary x){
+        return new Binary(toBin2(x.getValueInt()-this.Value));
+    }
+    public Int multiplicacion(INumber x){
+        return x.MultiplicacionInt(this);
+    }
+    public Int MultiplicacionInt(Int x){
+        return new Int(x.getValue() * this.Value);
+    }
+    public Float MultiplicacionFloat(Float x){
+        return new Float(x.getValue()*this.Value);
+    }
+    public Binary MultiplicacionBinary(Binary x){
+        return new Binary(toBin2(x.getValueInt()*this.Value));
+    }
+    public Int division(INumber x){
+        return x.DivisionInt(this);
+    }
+    public Int DivisionInt(Int x){
+        return new Int(x.getValue() / this.Value);
+    }
+    public Float DivisionFloat(Float x){
+        return new Float(x.getValue()/this.Value);
+    }
+    public Binary DivisionBinary(Binary x){
+        return new Binary(toBin2(x.getValueInt()/this.Value));
+    }
 }

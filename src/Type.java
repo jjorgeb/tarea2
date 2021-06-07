@@ -1,3 +1,3 @@
 public interface Type {
-    String getValue();
+    String toString();
 }

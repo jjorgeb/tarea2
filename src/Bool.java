@@ -23,8 +23,4 @@ public class Bool implements Type{
     }
 
 
-
-
-
-
 }
