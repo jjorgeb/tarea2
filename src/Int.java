@@ -1,4 +1,4 @@
-public class Int implements INumber, INumberNoFloat {
+public class Int implements INumber, INumberNoFloat, SumaString {
     private int Value;
 
     public Int(int valor){
@@ -77,7 +77,7 @@ public class Int implements INumber, INumberNoFloat {
         return new Binary(toBin2(this.Value));
     }
 
-    public Int suma(INumber x){
+    public INumber suma(INumber x){
         return x.SumaInt(this);
     }
     public Int SumaInt(Int x){
@@ -89,7 +89,7 @@ public class Int implements INumber, INumberNoFloat {
     public Binary SumaBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()+this.Value));
     }
-    public Int resta(INumber x){
+    public INumber resta(INumber x){
         return x.RestaInt(this);
     }
     public Int RestaInt(Int x){
@@ -101,7 +101,7 @@ public class Int implements INumber, INumberNoFloat {
     public Binary RestaBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()-this.Value));
     }
-    public Int multiplicacion(INumber x){
+    public INumber multiplicacion(INumber x){
         return x.MultiplicacionInt(this);
     }
     public Int MultiplicacionInt(Int x){
@@ -113,7 +113,7 @@ public class Int implements INumber, INumberNoFloat {
     public Binary MultiplicacionBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()*this.Value));
     }
-    public Int division(INumber x){
+    public INumber division(INumber x){
         return x.DivisionInt(this);
     }
     public Int DivisionInt(Int x){
@@ -124,5 +124,8 @@ public class Int implements INumber, INumberNoFloat {
     }
     public Binary DivisionBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()/this.Value));
+    }
+    public Str SSumaString(Str x){
+        return new Str(x.getValue()+this.toString());
     }
 }

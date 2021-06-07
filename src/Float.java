@@ -1,4 +1,4 @@
-public class Float implements INumber {
+public class Float implements INumber, SumaString {
     private double Value;
 
     public Float(double valor){
@@ -25,17 +25,20 @@ public class Float implements INumber {
         return x.SumaFloat(this);
     }
 
-    public Int SumaInt(Int x){
-        return new Int((int)this.Value + x.getValue());
+
+    public Float SumaInt(Int x){
+        return new Float(this.Value + x.getValue());
     }
+
     public Float SumaFloat(Float x){
         return new Float(x.getValue()+this.Value);
     }
     public Float resta(INumber x){
         return x.RestaFloat(this);
     }
-    public Int RestaInt(Int x){
-        return new Int(x.getValue() - (int)this.Value);
+
+    public Float RestaInt(Int x){
+        return new Float(x.getValue() - this.Value);
     }
     public Float RestaFloat(Float x){
         return new Float(x.getValue()-this.Value);
@@ -43,8 +46,8 @@ public class Float implements INumber {
     public Float multiplicacion(INumber x){
         return x.MultiplicacionFloat(this);
     }
-    public Int MultiplicacionInt(Int x){
-        return new Int((int)(x.getValue() * this.Value));
+    public Float MultiplicacionInt(Int x){
+        return new Float((x.getValue() * this.Value));
     }
     public Float MultiplicacionFloat(Float x){
         return new Float(x.getValue()*this.Value);
@@ -52,10 +55,13 @@ public class Float implements INumber {
     public Float division(INumber x){
         return x.DivisionFloat(this);
     }
-    public Int DivisionInt(Int x){
-        return new Int((int)(x.getValue() / this.Value));
+    public Float DivisionInt(Int x){
+        return new Float(x.getValue() / this.Value);
     }
     public Float DivisionFloat(Float x){
         return new Float(x.getValue()/this.Value);
+    }
+    public Str SSumaString(Str x){
+        return new Str(x.getValue()+this.toString());
     }
 }
