@@ -14,20 +14,20 @@ public class Int implements INumber, INumberNoFloat, SumaString {
         String s = "";
         int v = x;
         while(v>0){
-            s += String.valueOf(v%2);
+            s = String.valueOf(v%2) + s;
             v = v/2;
         }
         return s;
     }
     private String toBin2(int x){
         if(x>0){
-            return '1' + toBin1(x);
+            return '0' + toBin1(x);
         }
         else if(x==0){
             return "0000";
         }
         else{
-            return '1' + Add1(Neg(toBin1(x)));
+            return '1' + Add1(Neg(toBin1(Math.abs(x))));
         }
     }
 
@@ -47,12 +47,15 @@ public class Int implements INumber, INumberNoFloat, SumaString {
         String s1 = "";
         int buf = 1;
         for(int i = s.length()-1; i>=0 ;i--){
-            if(s.charAt(i)==1 & buf == 1){
+            if(s.charAt(i)=='1' & buf == 1){
                 s1 = '0' + s1;
             }
-            else if(s.charAt(i)==0 & buf==1){
+            else if(s.charAt(i)=='0' & buf==1){
                 s1 = '1' + s1;
-                buf--;
+                buf=0;
+            }
+            else if(s.charAt(i)=='1' & buf==0){
+                s1 = '1' + s1;
             }
             else{
                 s1 = s.charAt(i) + s1;
@@ -127,5 +130,14 @@ public class Int implements INumber, INumberNoFloat, SumaString {
     }
     public Str SSumaString(Str x){
         return new Str(x.getValue()+this.toString());
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Int){
+            var o = (Int) obj;
+            return (o.getValue()==this.Value);
+        }
+        return false;
     }
 }

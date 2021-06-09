@@ -64,4 +64,13 @@ public class Float implements INumber, SumaString {
     public Str SSumaString(Str x){
         return new Str(x.getValue()+this.toString());
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Float){
+            var ooo = (Float) obj;
+            return (ooo.getValue()==this.Value);
+        }
+        return false;
+    }
 }

@@ -24,4 +24,14 @@ public class Str implements SumaString {
     public Str SSumaString(Str x){
         return new Str(x.getValue()+this.Value);
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Str){
+            var other = (Str) obj;
+            return this.Value.equals(other.getValue());
+        }
+        return false;
+    }
+
 }

@@ -13,8 +13,6 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
         return toInt(this.Value);
     }
 
-
-
     private int toInt(String binary) {
         if(bitToInt(binary.charAt(0))==0) {
             return positiveBinToInt(binary);
@@ -45,20 +43,20 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
         String s = "";
         int v = x;
         while(v>0){
-            s += String.valueOf(v%2);
+            s = String.valueOf(v%2) + s;
             v = v/2;
         }
         return s;
     }
     private String toBin2(int x){
         if(x>0){
-            return '1' + toBin1(x);
+            return '0' + toBin1(x);
         }
         else if(x==0){
             return "0000";
         }
         else{
-            return '1' + Add1(Neg(toBin1(x)));
+            return '1' + Add1(Neg(toBin1(Math.abs(x))));
         }
     }
 
@@ -78,12 +76,15 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
         String s1 = "";
         int buf = 1;
         for(int i = s.length()-1; i>=0 ;i--){
-            if(s.charAt(i)==1 & buf == 1){
+            if(s.charAt(i)=='1' & buf == 1){
                 s1 = '0' + s1;
             }
-            else if(s.charAt(i)==0 & buf==1){
+            else if(s.charAt(i)=='0' & buf==1){
                 s1 = '1' + s1;
-                buf--;
+                buf=0;
+            }
+            else if(s.charAt(i)=='1' & buf==0){
+                s1 = '1' + s1;
             }
             else{
                 s1 = s.charAt(i) + s1;
@@ -127,10 +128,6 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
     public Binary suma(INumberNoFloat x){
         return x.SumaBinary(this);
     }
-    public Binary suma(Binary x){
-        return x.SumaBinary(this);
-    }
-    //falta cambiar la funcion
     public Binary SumaBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()+toInt(this.Value)));
     }
@@ -139,6 +136,9 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
     }
     public Float SumaFloat(Float x){
         return new Float(toInt(this.Value)+x.getValue());
+    }
+    public Binary resta(INumberNoFloat x){
+        return x.RestaBinary(this);
     }
     public Binary RestaBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()-toInt(this.Value)));
@@ -149,6 +149,9 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
     public Float RestaFloat(Float x){
         return new Float(x.getValue()-toInt(this.Value));
     }
+    public Binary multiplicacion(INumberNoFloat x){
+        return x.MultiplicacionBinary(this);
+    }
     public Binary MultiplicacionBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()*toInt(this.Value)));
     }
@@ -157,6 +160,9 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
     }
     public Float MultiplicacionFloat(Float x){
         return new Float(x.getValue()*toInt(this.Value));
+    }
+    public Binary division(INumberNoFloat x){
+        return x.DivisionBinary(this);
     }
     public Binary DivisionBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()/toInt(this.Value)));
@@ -240,6 +246,15 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
     }
     public Binary Negacion(){
         return new Binary(Neg(this.Value));
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Binary){
+            var oo = (Binary) obj;
+            return (oo.getValueInt()==this.getValueInt());
+        }
+        return false;
     }
 
 }

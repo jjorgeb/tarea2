@@ -101,6 +101,15 @@ public class Bool implements SumaString, IAndOr{
         }
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Bool){
+            var oooo = (Bool) obj;
+            return (oooo.getValue()==this.Value);
+        }
+        return false;
+    }
+
 
 
 }
