@@ -1,5 +1,6 @@
 Para poder probar las funcionalidades del programa hay que ejecutar las clases xTest.java, las cuales existen para cada una de las clases principales.
-Para poder probar las funcionalidades del programa hay que ejecutar las clases xTest.java, las cuales existen para cada una de las clases principales.
+
+
 La idea del programa es encapsular los tipos primitivos de java en clases que permitan abstraer el funcionamiento de estos tipos. Para eso cada clase se puede transformar
 en algunas de las otras dependiendo de cuál sea mediante un método.
 
