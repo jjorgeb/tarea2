@@ -1,8 +1,12 @@
-public class Float implements INumber, SumaString {
+public class Float implements INumber, SumaString, Leaf {
     private double Value;
 
     public Float(double valor){
         this.Value = valor;
+    }
+
+    public Float eval(){
+        return this;
     }
 
     /** Entrega al double Value como un string de java. */
@@ -30,6 +34,42 @@ public class Float implements INumber, SumaString {
     public Float suma(INumber x){
         return x.SumaFloat(this);
     }
+
+    /** Retorna lo mismo que suma pero con un cast Leaf. */
+    public Leaf sumaL(Leaf x){
+        return (Leaf) this.suma((INumber) x);
+    }
+
+    /** Retorna lo mismo que resta pero con un cast Leaf. */
+    public Leaf restaL(Leaf x){
+        return (Leaf) this.resta((INumber) x);
+    }
+
+    /** Retorna lo mismo que multiplicacion pero con un cast Leaf. */
+    public Leaf multiplicacionL(Leaf x){
+        return (Leaf) this.multiplicacion((INumber) x);
+    }
+
+    /** Retorna lo mismo que division pero con un cast Leaf. */
+    public Leaf divisionL(Leaf x){
+        return (Leaf) this.division((INumber) x);
+    }
+
+    @Override
+    public Leaf OrL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf AndL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf NegacionL() {
+        return null;
+    }
+
 
     /** Retorna un Float inicializado con el valor Value sumado con el valor de x. */
     public Float SumaInt(Int x){

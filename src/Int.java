@@ -1,8 +1,12 @@
-public class Int implements INumber, INumberNoFloat, SumaString {
+public class Int implements INumber, INumberNoFloat, SumaString, Leaf {
     private int Value;
 
     public Int(int valor){
         this.Value = valor;
+    }
+
+    public Int eval(){
+        return this;
     }
 
     /** Entrega al entero Value como un string de java. */
@@ -92,9 +96,43 @@ public class Int implements INumber, INumberNoFloat, SumaString {
      *  del caso en que x es un Float en el cual se retornara un Float, en el cual el valor sera la suma del valor
      *  de Int con el valor de x.
      */
-    public INumber suma(INumber x){
+    public INumber suma(INumber x) {
         return x.SumaInt(this);
     }
+
+    /** Retorna lo mismo que suma pero con un cast Leaf. */
+    public Leaf sumaL(Leaf x){
+        return (Leaf) this.suma((INumber) x);
+    }
+
+    /** Retorna lo mismo que resta pero con un cast Leaf. */
+    public Leaf restaL(Leaf x){
+        return (Leaf) this.resta((INumber) x);
+    }
+    /** Retorna lo mismo que multiplicacion pero con un cast Leaf. */
+    public Leaf multiplicacionL(Leaf x){
+        return (Leaf) this.multiplicacion((INumber) x);
+    }
+    /** Retorna lo mismo que division pero con un cast Leaf. */
+    public Leaf divisionL(Leaf x){
+        return (Leaf) this.division((INumber) x);
+    }
+
+    @Override
+    public Leaf OrL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf AndL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf NegacionL() {
+        return null;
+    }
+
 
     /** Retorna un Int inicializado con el valor Value sumado con el valor de x. */
     public Int SumaInt(Int x){
