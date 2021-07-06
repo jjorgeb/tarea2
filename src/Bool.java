@@ -1,4 +1,4 @@
-public class Bool implements SumaString, IAndOr{
+public class Bool implements SumaString, IAndOr, Leaf{
     private boolean Value;
 
     public Bool(boolean valor){
@@ -111,5 +111,46 @@ public class Bool implements SumaString, IAndOr{
     }
 
 
+    @Override
+    public Leaf sumaL(Leaf l) {
+        return null;
+    }
 
+    @Override
+    public Leaf restaL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf divisionL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf multiplicacionL(Leaf l) {
+        return null;
+    }
+
+    /** Retorna lo mismo que Or pero con un cast Leaf. */
+    @Override
+    public Leaf OrL(Leaf l) {
+        return (Leaf) this.Or((IAndOr) l);
+    }
+
+    /** Retorna lo mismo que And pero con un cast Leaf. */
+    @Override
+    public Leaf AndL(Leaf l) {
+        return (Leaf) this.And((IAndOr) l);
+    }
+
+    /** Retorna lo mismo que Negacion pero con un cast Leaf. */
+    @Override
+    public Leaf NegacionL() {
+        return (Leaf) this.Negacion();
+    }
+
+    @Override
+    public Leaf eval() {
+        return this;
+    }
 }

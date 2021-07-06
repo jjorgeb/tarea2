@@ -1,8 +1,12 @@
-public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
+public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr, Leaf{
     private String Value;
 
     public Binary(String valor){
         this.Value = valor;
+    }
+
+    public Binary eval(){
+        return this;
     }
 
 
@@ -128,6 +132,45 @@ public class Binary implements INumber, INumberNoFloat, SumaString, IAndOr{
     public Binary suma(INumberNoFloat x){
         return x.SumaBinary(this);
     }
+
+    /** Retorna lo mismo que suma pero con un cast Leaf. */
+    public Leaf sumaL(Leaf x){
+        return (Leaf) this.suma((INumberNoFloat) x);
+    }
+
+    /** Retorna lo mismo que resta pero con un cast Leaf. */
+    public Leaf restaL(Leaf x){
+        return (Leaf) this.resta((INumberNoFloat) x);
+    }
+
+    @Override
+    public Leaf divisionL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf multiplicacionL(Leaf l) {
+        return null;
+    }
+
+    /** Retorna lo mismo que Or pero con un cast Leaf. */
+    @Override
+    public Leaf OrL(Leaf l) {
+        return (Leaf) this.Or((IAndOr) l);
+    }
+
+    /** Retorna lo mismo que And pero con un cast Leaf. */
+    @Override
+    public Leaf AndL(Leaf l) {
+        return (Leaf) this.And((IAndOr) l);
+    }
+
+    /** Retorna lo mismo que Negacion pero con un cast Leaf. */
+    @Override
+    public Leaf NegacionL() {
+        return (Leaf) this.Negacion();
+    }
+
     public Binary SumaBinary(Binary x){
         return new Binary(toBin2(x.getValueInt()+toInt(this.Value)));
     }

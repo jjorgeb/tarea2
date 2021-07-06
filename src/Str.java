@@ -1,4 +1,4 @@
-public class Str implements SumaString {
+public class Str implements SumaString, Leaf {
     private String Value;
 
     public Str(String string){
@@ -17,6 +17,10 @@ public class Str implements SumaString {
         return new Str(this.Value);
     }
 
+
+    /** Retorna el resultado de realizar la operacion SSumaString en la clase de x, lo cual devolvera un Str,
+     *  en el cual el valor sera la concatenacion del valor de this con el valor de x.
+     */
     public Str suma(SumaString x){
         return x.SSumaString(this);
     }
@@ -32,6 +36,50 @@ public class Str implements SumaString {
             return this.Value.equals(other.getValue());
         }
         return false;
+    }
+
+    /** Retorna lo mismo que suma pero con un cast Leaf. */
+    @Override
+    public Leaf sumaL(Leaf l) {
+        return suma((SumaString) l);
+    }
+
+
+    @Override
+    public Leaf restaL(Leaf l) {
+        return null;
+    }
+
+
+    @Override
+    public Leaf divisionL(Leaf l) {
+        return null;
+    }
+
+
+    @Override
+    public Leaf multiplicacionL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf OrL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf AndL(Leaf l) {
+        return null;
+    }
+
+    @Override
+    public Leaf NegacionL() {
+        return null;
+    }
+
+    @Override
+    public Leaf eval() {
+        return this;
     }
 
 }
